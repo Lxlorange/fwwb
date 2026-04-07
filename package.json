@@ -1,0 +1,42 @@
+{
+  "name": "zhi_hui_ji_chang",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "node ./scripts/prepare.js serve",
+    "build": "node ./scripts/prepare.js build",
+    "serve17": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build17": "SET NODE_OPTIONS=--openssl-legacy-provider &&  vue-cli-service build",
+    "serve14": "vue-cli-service serve",
+    "build14": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@turf/turf": "^6.5.0",
+    "@types/js-cookie": "^3.0.1",
+    "animate.css": "^4.1.1",
+    "ant-design-vue": "^2.2.8",
+    "axios": "^0.24.0",
+    "dayjs": "^1.10.5",
+    "echarts": "^5.2.2",
+    "echarts-liquidfill": "^3.1.0",
+    "element-plus": "^1.2.0-beta.3",
+    "js-cookie": "^3.0.1",
+    "pinia": "^2.0.4",
+    "swiper": "6.8.4",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "@types/node": "^20.8.3",
+    "sass": "^1.69.0",
+    "sass-loader": "^10.0.3",
+    "typescript": "^4.9.0"
+  }
+}
