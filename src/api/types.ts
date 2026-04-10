@@ -68,3 +68,18 @@ export interface WorkOrderResponse {
   status: string; // "PENDING", "PROCESSING", "DONE"
   created_at: string; // ISO String
 }
+
+// ==================== 5. NC 海洋历史数据交互 Playground ====================
+export interface NcDataRequest {
+  start_time: string;
+  end_time: string;
+  lat: number;
+  lon: number;
+}
+
+export interface NcDataResponse {
+  target_lat: number;
+  target_lon: number;
+  total_points: number;
+  series: Array<{ time: string; sst: number; sss: number; wave_height: number }>;
+}

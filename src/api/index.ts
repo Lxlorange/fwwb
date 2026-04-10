@@ -3,7 +3,8 @@ import {
   AnomalyRequest, AnomalyResponse,
   CVDetectRequest, CVDetectResponse,
   ForecastRequest, ForecastResponse,
-  WorkOrderRequest, WorkOrderResponse
+  WorkOrderRequest, WorkOrderResponse,
+  NcDataRequest, NcDataResponse
 } from './types';
 
 /**
@@ -15,7 +16,7 @@ export const detectWindWaveAnomaly = (data: AnomalyRequest): Promise<AnomalyResp
     url: '/anomaly/wind_wave',
     method: 'post',
     data
-  });
+  }) as unknown as Promise<AnomalyResponse>;
 };
 
 /**
@@ -27,7 +28,7 @@ export const detectTrash = (data: CVDetectRequest): Promise<CVDetectResponse> =>
     url: '/cv/detect_trash',
     method: 'post',
     data
-  });
+  }) as unknown as Promise<CVDetectResponse>;
 };
 
 /**
@@ -39,7 +40,7 @@ export const habitatForecast = (data: ForecastRequest): Promise<ForecastResponse
     url: '/forecast/habitat',
     method: 'post',
     data
-  });
+  }) as unknown as Promise<ForecastResponse>;
 };
 
 /**
@@ -51,5 +52,18 @@ export const createWorkOrder = (data: WorkOrderRequest): Promise<WorkOrderRespon
     url: '/workorder/create',
     method: 'post',
     data
-  });
+  }) as unknown as Promise<WorkOrderResponse>;
+};
+
+
+/**
+ * 5. 解析真实NC文件数据 API
+ * 提供给操纵台提取基于真实NC文件返回的数据展示在前端。
+ */
+export const getNcExtractData = (params: NcDataRequest): Promise<NcDataResponse> => {
+  return request({
+    url: '/data/nc_extract',
+    method: 'get',
+    params
+  }) as unknown as Promise<NcDataResponse>;
 };

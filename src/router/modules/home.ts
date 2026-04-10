@@ -49,5 +49,14 @@ export const dashboardRoutes: RouteRecordRaw[] = [
       title: '系统管理',
       description: '统一管理数据集、模型版本、任务记录和结果导出。'
     }
+  },
+  {
+    path: 'playground',
+    name: 'playground',
+    component: () => import('@/Views/DataPlayground.vue'),
+    meta: {
+      title: '接口控制台',
+      description: '动态调试和提取真实海洋历史 NC 数据接口。'
+    }
   }
 ]
