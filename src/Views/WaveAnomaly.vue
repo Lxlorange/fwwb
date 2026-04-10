@@ -60,6 +60,9 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+import { detectWindWaveAnomaly, createWorkOrder } from '@/api/index';
+
 import BaseChart from '@/components/dashboard/BaseChart.vue'
 import MetricCard from '@/components/dashboard/MetricCard.vue'
 import PanelCard from '@/components/dashboard/PanelCard.vue'
@@ -76,6 +79,34 @@ import {
 
 const anomalyScoreOption = createAnomalyScoreOption()
 const riskDistributionOption = createRiskDistributionOption()
+
+
+onMounted(async () => {
+  try {
+    const res = await detectWindWaveAnomaly({
+      recent_data: [
+        { wind_speed: 15.2, wave_height: 3.5 },
+        { wind_speed: 18.5, wave_height: 4.2 }
+      ],
+      latitude: 22.5,
+      longitude: 114.0,
+      timestamp: new Date().toISOString()
+    });
+    console.log('风浪预警分析结果:', res);
+
+    if (res.warning_level === 'MEDIUM' || res.warning_level === 'HIGH' || res.suggest_sink) {
+      console.log('触发高级预警，自动生成工单任务...');
+      const orderRes = await createWorkOrder({
+        alarm_id: 'ALARM-' + new Date().getTime(),
+        description: '系统检测到风浪异常等级为 ' + res.warning_level + '，需派员立即检查深海网箱沉降状态。'
+      });
+      console.log('工单生成成功:', orderRes);
+    }
+  } catch (err) {
+    console.error('API Error in WaveAnomaly:', err);
+  }
+});
+
 </script>
 
 <style lang="scss" scoped>

@@ -57,6 +57,9 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+import { detectTrash } from '@/api/index';
+
 import BaseChart from '@/components/dashboard/BaseChart.vue'
 import MetricCard from '@/components/dashboard/MetricCard.vue'
 import PanelCard from '@/components/dashboard/PanelCard.vue'
@@ -73,6 +76,21 @@ import {
 
 const goalComplianceOption = createGoalComplianceOption()
 const throughputOption = createThroughputOption()
+
+
+onMounted(async () => {
+  try {
+    // 这里使用一份 mock Base64 作为测试
+    const mockImageBase64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..."; 
+    const res = await detectTrash({
+      image_base64: mockImageBase64
+    });
+    console.log('海洋垃圾 CV 识别结果:', res);
+  } catch (err) {
+    console.error('API Error in HomeOverview:', err);
+  }
+});
+
 </script>
 
 <style lang="scss" scoped>

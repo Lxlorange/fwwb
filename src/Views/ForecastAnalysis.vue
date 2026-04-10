@@ -40,6 +40,9 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+import { habitatForecast } from '@/api/index';
+
 import BaseChart from '@/components/dashboard/BaseChart.vue'
 import MetricCard from '@/components/dashboard/MetricCard.vue'
 import PanelCard from '@/components/dashboard/PanelCard.vue'
@@ -55,6 +58,21 @@ import {
 
 const forecastTrendOption = createForecastTrendOption()
 const forecastHeatmapOption = createForecastHeatmapOption()
+
+
+onMounted(async () => {
+  try {
+    const res = await habitatForecast({
+      latitude: 18.2,
+      longitude: 109.5,
+      timestamp: new Date().toISOString()
+    });
+    console.log('生境预测分析结果:', res);
+  } catch (err) {
+    console.error('API Error in ForecastAnalysis:', err);
+  }
+});
+
 </script>
 
 <style lang="scss" scoped>
